@@ -1,31 +1,24 @@
-// function calculateTriangleArea(){
-//     const baseField = document.getElementById('triangle-base');
-//     const baseValueText = baseField.value;
-//     const base = parseFloat(baseValueText);
-//     console.log(base);
-
-
-//     const heightField = document.getElementById('triangle-height');
-//     const heightValueText = heightField.value;
-//     const height = parseFloat(heightValueText);
-//     console.log(height);
-
-//     const area = 0.5 * base * height;
-//     console.log(area);
-
-//     const areaField = document.getElementById('triangle-area');
-//     areaField.innerText = area;
-// }
-
 function calculateTriangleArea(){
-    const base = getInputValue('triangle-base');
+    const baseField = document.getElementById('triangle-base');
+    const baseValueText = baseField.value;
+    const base = parseFloat(baseValueText);
+    console.log(base);
 
-    const height = getInputValue('triangle-height');
+
+    const heightField = document.getElementById('triangle-height');
+    const heightValueText = heightField.value;
+    const height = parseFloat(heightValueText);
+    console.log(height);
 
     const area = 0.5 * base * height;
+    console.log(area);
 
-    setElementInnerText('triangle-area', area);
+    const areaField = document.getElementById('triangle-area');
+    areaField.innerText = area;
+
+    addToCalculationEntry('Triangle', area);
 }
+
 
 
 function calculateRectangleArea(){
@@ -36,6 +29,8 @@ function calculateRectangleArea(){
     const area = width * length;
 
     setElementInnerText('rectangle-area', area);
+
+    addToCalculationEntry('Rectangle', area);
 }
 
 
@@ -46,6 +41,7 @@ function calculateParallelogramArea(){
     const area = base * height;
 
     setElementInnerText('parallelogram-area', area);
+    addToCalculationEntry('Parallelogram', area)
 }
 
 function calculateEllipseArea(){
@@ -55,6 +51,7 @@ function calculateEllipseArea(){
     const area = 3.14 * majorRadius * minorRadius;
 
     setElementInnerText('ellipse-area', area);
+    addToCalculationEntry('Ellipse', area)
 }
 
 
@@ -68,4 +65,17 @@ function getInputValue(fieldId){
 function setElementInnerText(elementId, area){
     const element = document.getElementById(elementId)
     element.innerText = area;
+}
+
+function addToCalculationEntry(areaType, area){
+    console.log(areaType+ ' '  + area)
+    const calculationEntry = document.getElementById('calculation-entry');
+
+    const count = calculationEntry.childElementCount;
+
+    const p = document.createElement('p');
+    p.classList.add('my-4');
+    p.innerHTML = `${count + 1}. ${areaType} ${area} cm<sup>2</sup> <button class="btn btn-sm btn-success">Convert</button>`;
+
+    calculationEntry.appendChild(p);
 }
